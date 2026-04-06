@@ -26,7 +26,7 @@ public class MartinFootsteps {
         HashSet<Long> candidateV2Set = new HashSet<>();
 
         for (long k = 0; k <= N; k++) {
-          long position = D + k * V1;
+          long position = D + Math.multiplyExact(k, V1);
           if (position <= 0) {
             continue; // preserve original behavior: skip non-positive positions
           }
@@ -84,6 +84,10 @@ public class MartinFootsteps {
      * kMax = N (or min(N, floor(D/(v2-V1))) when v2>V1 to ensure t>=k).
      */
     private static long countValidStepsForV2(long D, long V1, long N, long v2) {
+      if (v2 <= 0) {
+        return 0;
+      }
+
       // Compute minimal k that makes position > 0 (original code skipped position<=0)
       long kMin;
       if (D > 0) {
