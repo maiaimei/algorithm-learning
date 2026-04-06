@@ -12,7 +12,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 @DisplayName("RemoveVowels 删除元音字母测试")
-class RemovingAllVowelsTest {
+class RemoveVowelsTest {
 
   private String executeWithInput(String input) {
     InputStream originalIn = System.in;
@@ -25,7 +25,7 @@ class RemovingAllVowelsTest {
       System.setIn(inputStream);
       System.setOut(new PrintStream(outputStream));
 
-      RemovingAllVowels.Solution.main(new String[]{});
+      RemoveVowels.Solution.main(new String[]{});
 
       return outputStream.toString().trim();
     } finally {
