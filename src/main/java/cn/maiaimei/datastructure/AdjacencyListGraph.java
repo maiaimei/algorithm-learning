@@ -36,6 +36,11 @@ public class AdjacencyListGraph {
     addVertex(source);
     addVertex(destination);
 
+    // 检查是否已存在该边，避免重复添加
+    if (adjacencyList.get(source).contains(destination)) {
+      return;
+    }
+
     // 添加边
     adjacencyList.get(source).add(destination);
 

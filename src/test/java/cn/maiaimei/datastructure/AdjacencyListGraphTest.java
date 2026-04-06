@@ -94,10 +94,11 @@ public class AdjacencyListGraphTest {
     graph.addEdge(1, 2); // 重复添加
 
     // 无向图允许平行边（多重边）
-    assertEquals(2, graph.getEdgeCount());
+    assertEquals(1, graph.getEdgeCount());
 
     List<Integer> neighbors = graph.getNeighbors(1);
-    assertEquals(2, neighbors.size(), "应该有两个邻居（允许重复）");
+    assertEquals(1, neighbors.size(), "不应该有重复邻居");
+    assertEquals(2, neighbors.get(0));
   }
 
   // ==================== 删除操作测试 ====================
