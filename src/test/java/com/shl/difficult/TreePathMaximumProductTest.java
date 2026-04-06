@@ -2,6 +2,7 @@ package com.shl.difficult;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import com.shl.difficult.TreePathMaximumProduct.Solution;
 import java.io.*;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
@@ -25,7 +26,7 @@ class TreePathMaximumProductTest {
       System.setIn(inputStream);
       System.setOut(new PrintStream(outputStream));
 
-      TreePathMaximumProduct.Solution1.main(new String[]{});
+      Solution.main(new String[]{});
 
       return outputStream.toString().trim();
     } catch (IOException e) {
@@ -74,6 +75,7 @@ class TreePathMaximumProductTest {
 
       long product = Long.parseLong(result);
       assertTrue(product != 0, "Product should not be zero for non-zero values");
+      assertEquals(24, product);
     }
 
     @Test
@@ -86,6 +88,7 @@ class TreePathMaximumProductTest {
       assertNotNull(result);
       long product = Long.parseLong(result);
       assertTrue(product > 0, "Product should be positive for all positive values");
+      assertEquals(180, product);
     }
 
     @Test
@@ -98,6 +101,7 @@ class TreePathMaximumProductTest {
       assertNotNull(result);
       long product = Long.parseLong(result);
       assertTrue(product > 0);
+      assertEquals(60, product);
     }
   }
 
@@ -197,7 +201,7 @@ class TreePathMaximumProductTest {
 
       assertNotNull(result);
       long product = Long.parseLong(result);
-      assertTrue(product == 0 || product != 0, "Product can be zero or non-zero depending on path");
+      assertEquals(0, product);
     }
 
     @Test
@@ -219,7 +223,7 @@ class TreePathMaximumProductTest {
 
       assertNotNull(result);
       long product = Long.parseLong(result);
-      assertTrue(product != 0, "Product of negative numbers should not be zero");
+      assertEquals(120, product);
     }
 
     @Test
@@ -231,7 +235,7 @@ class TreePathMaximumProductTest {
 
       assertNotNull(result);
       long product = Long.parseLong(result);
-      assertTrue(product > 0, "Should find a path with positive product using negative*negative");
+      assertEquals(120, product);
     }
 
     @Test
@@ -241,8 +245,8 @@ class TreePathMaximumProductTest {
 
       String result = executeWithInput(input);
 
-      assertNotNull(result);
-      assertFalse(result.isEmpty());
+      long product = Long.parseLong(result);
+      assertEquals(0, product);
     }
 
     @Test
@@ -389,6 +393,7 @@ class TreePathMaximumProductTest {
 
       long product = Long.parseLong(result);
       assertTrue(product < 0, "Product with odd number of negatives should be negative");
+      assertEquals(-2 * 3 * 4, product);
     }
 
     @Test
