@@ -12,7 +12,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 @DisplayName("Bouquet 花束排列测试")
-class BouquetTest {
+class ArrangeBouquetTest {
 
   private String executeWithInput(String input) {
     InputStream originalIn = System.in;
@@ -25,7 +25,7 @@ class BouquetTest {
       System.setIn(inputStream);
       System.setOut(new PrintStream(outputStream));
 
-      Bouquet.Solution.main(new String[]{});
+      ArrangeBouquet.Solution.main(new String[]{});
 
       return outputStream.toString().trim();
     } finally {

@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 /**
  * This class represents a solution to the "Bouquet" problem.
  */
-public class Bouquet {
+public class ArrangeBouquet {
 
   public static class Solution {
 
