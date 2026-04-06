@@ -9,64 +9,65 @@ public class MartinFootsteps {
 
     public static void main(String[] args) {
 
-      Scanner scanner = new Scanner(System.in);
+      try (Scanner scanner = new Scanner(System.in)) {
 
-      long X1 = scanner.nextLong();
-      long X2 = scanner.nextLong();
-      long V1 = scanner.nextLong();
-      long N = scanner.nextLong();
+        long X1 = scanner.nextLong();
+        long X2 = scanner.nextLong();
+        long V1 = scanner.nextLong();
+        long N = scanner.nextLong();
 
-      // D is the distance from Martin to father's current position
-      long D = X1 - X2;
+        // D is the distance from Martin to father's current position
+        long D = X1 - X2;
 
-      // Phase 1: collect unique candidate V2 values by enumerating divisors of
-      // positions = D + k*V1 (for k = 0..N) but only when position > 0 and
-      // t = position / v2 >= k (same filtering as original implementation).
-      // We store candidates into a set to avoid duplicate work in phase 2.
-      HashSet<Long> candidateV2Set = new HashSet<>();
+        // Phase 1: collect unique candidate V2 values by enumerating divisors of
+        // positions = D + k*V1 (for k = 0..N) but only when position > 0 and
+        // t = position / v2 >= k (same filtering as original implementation).
+        // We store candidates into a set to avoid duplicate work in phase 2.
+        HashSet<Long> candidateV2Set = new HashSet<>();
 
-      for (long k = 0; k <= N; k++) {
-        long position = D + k * V1;
-        if (position <= 0) {
-          continue; // preserve original behavior: skip non-positive positions
-        }
+        for (long k = 0; k <= N; k++) {
+          long position = D + k * V1;
+          if (position <= 0) {
+            continue; // preserve original behavior: skip non-positive positions
+          }
 
-        long limit = (long) Math.sqrt(position);
-        for (long d = 1; d <= limit; d++) {
-          if (position % d == 0) {
-            long v2b = position / d;
+          long limit = (long) Math.sqrt(position);
+          for (long d = 1; d <= limit; d++) {
+            if (position % d == 0) {
+              long v2b = position / d;
 
-            // Check t >= k condition (t = position / v2)
-            long tForA = position / d;
-            if (tForA >= k) {
-              candidateV2Set.add(d);
-            }
+              // Check t >= k condition (t = position / v2)
+              long tForA = position / d;
+              if (tForA >= k) {
+                candidateV2Set.add(d);
+              }
 
-            if (v2b != d) {
-              long tForB = position / v2b;
-              if (tForB >= k) {
-                candidateV2Set.add(v2b);
+              if (v2b != d) {
+                long tForB = position / v2b;
+                if (tForB >= k) {
+                  candidateV2Set.add(v2b);
+                }
               }
             }
           }
         }
-      }
 
-      // Phase 2: for each unique candidate V2 compute the exact number of
-      // valid k in [0..N] that satisfy both divisibility and t >= k using
-      // number theory (linear congruence + arithmetic progression counting).
-      long bestF = 0;
-      long bestV2 = 0;
+        // Phase 2: for each unique candidate V2 compute the exact number of
+        // valid k in [0..N] that satisfy both divisibility and t >= k using
+        // number theory (linear congruence + arithmetic progression counting).
+        long bestF = 0;
+        long bestV2 = 0;
 
-      for (long candidateV2 : candidateV2Set) {
-        long count = countValidStepsForV2(D, V1, N, candidateV2);
-        if (count > bestF || (count == bestF && candidateV2 > bestV2)) {
-          bestF = count;
-          bestV2 = candidateV2;
+        for (long candidateV2 : candidateV2Set) {
+          long count = countValidStepsForV2(D, V1, N, candidateV2);
+          if (count > bestF || (count == bestF && candidateV2 > bestV2)) {
+            bestF = count;
+            bestV2 = candidateV2;
+          }
         }
-      }
 
-      System.out.println(bestF + " " + bestV2);
+        System.out.println(bestF + " " + bestV2);
+      }
     }
 
     /**
