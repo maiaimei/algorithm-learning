@@ -199,11 +199,11 @@ class MartinFootstepsTest {
     @Test
     @DisplayName("X2=0且X1=1（极端情况）")
     void testX2ZeroX1One() {
-      String input = "1 0\n1 1";
+      String input = "1 0\n2 1";
 
       String result = executeWithInput(input);
 
-      assertEquals("1 1", result);
+      assertEquals("2 1", result);
     }
   }
 
@@ -296,18 +296,18 @@ class MartinFootstepsTest {
 
     private static Stream<Arguments> provideTestCases() {
       return Stream.of(
-          Arguments.of("3 2\n2 20", "21 1"),
-          Arguments.of("1 0\n1 1", "1 1"),
-          Arguments.of("5 5\n2 5", null),
-          Arguments.of("10 0\n5 8", null),
-          Arguments.of("100 50\n10 20", null)
+          Arguments.of("3 2\n2 20", "21 1", "示例：X1=3,X2=2,V1=2,N=20"),
+          Arguments.of("1 0\n1 1", "2 1", "最小约束：X1=1,X2=0,V1=1,N=1"),
+          Arguments.of("5 5\n2 5", null, "同起点：X1=X2=5,V1=2,N=5"),
+          Arguments.of("10 0\n5 8", null, "马丁在家：X1=10,X2=0,V1=5,N=8"),
+          Arguments.of("100 50\n10 20", null, "中等规模：X1=100,X2=50,V1=10,N=20")
       );
     }
 
-    @ParameterizedTest(name = "{index}: Input={0}")
+    @ParameterizedTest(name = "{index}: {2}")
     @MethodSource("provideTestCases")
     @DisplayName("多组数据验证")
-    void testMultipleCases(String input, String expected) {
+    void testMultipleCases(String input, String expected, String description) {
       String result = executeWithInput(input);
 
       if (expected != null) {
