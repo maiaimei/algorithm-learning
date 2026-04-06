@@ -43,7 +43,7 @@ public class RemoveVowels {
      * @param input The input string containing only English letters.
      * @return The string after removing all vowels.
      */
-    public static String removeVowels(String input) {
+    private static String removeVowels(String input) {
       if (input == null || input.isEmpty()) {
         // Handle null or empty input
         return "";
