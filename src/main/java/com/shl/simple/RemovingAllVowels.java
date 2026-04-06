@@ -2,7 +2,7 @@ package com.shl.simple;
 
 import java.util.Scanner;
 
-public class RemoveVowels {
+public class RemovingAllVowels {
 
   public static class Solution {
 
