@@ -1,4 +1,4 @@
-package com.shl.medium;
+package com.shl.difficult;
 
 import java.util.HashSet;
 import java.util.Scanner;
